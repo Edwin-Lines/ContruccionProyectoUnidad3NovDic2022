@@ -16,10 +16,11 @@ class ValidadorArchivosTest {
 	ValidadorArchivos validador = new ValidadorArchivos();
 
 	@Test
-	@DisplayName("No debe continuarse la lectura si tiene caracteres o tokens erroneos en el archivo json")
+	@DisplayName("No debe continuarse la lectura si tiene caracteres,tokens erroneos en el archivo json o cuando está vacio")
 	public void deberiaLanzarParseException() {
 		Assertions.assertThrows(org.json.simple.parser.ParseException.class, () -> {
 			validador.lecturaArchivo("erroresSintacticos.json", "files");
+			validador.lecturaArchivo("vacio.json", "files");
 		});
 	}
 
