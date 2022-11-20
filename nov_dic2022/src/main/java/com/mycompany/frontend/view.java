@@ -2,9 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.nov_dic2022;
+package com.mycompany.frontend;
 
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+import unidad_3.backend.Empleado;
 
 /**
  *
@@ -12,24 +16,54 @@ import javax.swing.table.DefaultTableModel;
  */
 public class view extends javax.swing.JFrame {
 
+    ArrayList<Empleado> listEmpleado= new ArrayList();
+     
     /**
      * Creates new form view
      */
+    private void propiedadesTabla(){
+        tablaDatos.setDefaultRenderer(Object.class, new ImgTable());
+        String titulos[]={"Id","FirstName","LastName","Photo"};
+        DefaultTableModel tm=new DefaultTableModel(null,titulos);
+        tablaDatos.setRowHeight(200);
+        
+        tablaDatos.setModel(tm);
+        llenarTabla(tm);
+    }
+    public view(ArrayList listEmpleado) {
+        this.listEmpleado=listEmpleado;
+        initComponents();
+        propiedadesTabla();
+    }
     
     public view() {
         initComponents();
-        DefaultTableModel model = new DefaultTableModel();
+        propiedadesTabla();
         
-        model.addColumn("Id");
-        model.addColumn("FirstName");
-        model.addColumn("LastName");
-        model.addColumn("Photo");
-        model.addRow(new Object[]{"1","Rafael","Perea","onlyfans.com/RafaelPerea"});
-        model.addRow(new Object[]{"2","Edwin","Andrade","googlePhotos.com/EdwinA"});
-        model.addRow(new Object[]{"3","Antonio","Cituk","onlyfans.com/TonyCituk"});
-        
-        tablaDatos.setModel(model);
     }
+    
+    public void llenarTabla(DefaultTableModel tm){
+        int numRegistros=listEmpleado.size();
+        for(int i=0;i<numRegistros;i++){
+            tm.addRow(new Object[]{
+                listEmpleado.get(i).getId(),
+                listEmpleado.get(i).getFirstName(),
+                listEmpleado.get(i).getLastName(),
+                new ImgTable().mostrar_imagen(listEmpleado.get(i).getPhoto())
+            });
+            
+        }   
+    }
+
+    public ArrayList<Empleado> getListEmpleado() {
+        return listEmpleado;
+    }
+
+    public void setListEmpleado(ArrayList<Empleado> listEmpleado) {
+        this.listEmpleado = listEmpleado;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,21 +137,21 @@ public class view extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jButton1)
-                .addGap(94, 94, 94)
+                .addGap(123, 123, 123)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(27, 27, 27))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(130, 130, 130))
+                .addGap(151, 151, 151))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,18 +167,21 @@ public class view extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -183,10 +220,23 @@ public class view extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(view.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                //EJEMPLO 
+                // Empleado e= new Empleado("1","Tom","Cruise","https://jsonformatter.org/img/tom-cruise.jpg");
+                // Empleado f= new Empleado("2","Maria","Sharapova","https://jsonformatter.org/img/Maria-Sharapova.jpg");
+                // Empleado g= new Empleado("3","Robert","Downey Jr.","https://jsonformatter.org/img/Robert-Downey-Jr.jpg");
+
+                // ArrayList<Empleado> a = new ArrayList();
+                // a.add(e);
+                // a.add(f);
+                // a.add(g);
+
+                // view iew= new view(a);
+                // iew.setVisible(true);
                 new view().setVisible(true);
             }
         });
