@@ -16,6 +16,7 @@ import unidad_3.backend.Empleado;
 import unidad_3.backend.Exceptions.EstructuraException;
 import unidad_3.backend.Exceptions.LlaveSinValorException;
 import unidad_3.backend.LectorConvertorJSON;
+import unidad_3.backend.ModificadorArchivosJSON;
 
 /**
  *
@@ -35,8 +36,11 @@ public class Intermediario {
       }
       
       public Intermediario(ArrayList<Empleado> empleados){
-        ModificadorArchivosJSON.actualizarArchivo(empleados,directorio);
-        envioArrayList();
+        String dir=directorio+nombreArchivo;
+        if(ModificadorArchivosJSON.actualizarArchivo(empleados,dir)){
+            envioArrayList();
+        }
+            
       }
 
       public void envioArrayList(){
