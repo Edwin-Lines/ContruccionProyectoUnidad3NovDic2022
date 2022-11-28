@@ -23,10 +23,11 @@ import unidad_3.backend.ModificadorArchivosJSON;
  * @author betoh
  */
 public class Intermediario {
-      private String nombreArchivo;
-      private String directorio;
+      private static String nombreArchivo;
+      private static String directorio;
       LectorConvertorJSON lector= new LectorConvertorJSON();
       ArrayList<Empleado> empleados= new ArrayList();
+      private static view nView;
 
     
       public Intermediario(String nombreArchivo, String directorio) {
@@ -39,6 +40,7 @@ public class Intermediario {
         String dir=directorio+nombreArchivo;
         if(ModificadorArchivosJSON.actualizarArchivo(empleados,dir)){
             envioArrayList();
+            UpdateView();
         }
             
       }
@@ -46,7 +48,9 @@ public class Intermediario {
       public void envioArrayList(){
          try {
                empleados=lector.lecturaArchivo(nombreArchivo, directorio);
-               new view(empleados).setVisible(true);
+               nView= new view(empleados);
+               nView.setVisible(true);
+               
          } catch (EstructuraException ex) {
                Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
          } catch (IOException ex) {
@@ -56,6 +60,11 @@ public class Intermediario {
          } catch (LlaveSinValorException ex) {
                Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
          }
+      }
+
+      public void UpdateView() {
+            nView.setVisible(false);
+            nView.setVisible(true);
       }
       
       
