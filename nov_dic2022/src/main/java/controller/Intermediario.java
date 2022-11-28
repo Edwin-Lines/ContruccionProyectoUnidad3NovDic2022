@@ -28,10 +28,15 @@ public class Intermediario {
       ArrayList<Empleado> empleados= new ArrayList();
 
     
-    public Intermediario(String nombreArchivo, String directorio) {
+      public Intermediario(String nombreArchivo, String directorio) {
          this.nombreArchivo = nombreArchivo;
          this.directorio = directorio;
          envioArrayList();
+      }
+      
+      public Intermediario(ArrayList<Empleado> empleados){
+        ModificadorArchivosJSON.actualizarArchivo(empleados,directorio);
+        envioArrayList();
       }
 
       public void envioArrayList(){
@@ -48,6 +53,8 @@ public class Intermediario {
                Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
          }
       }
+      
+      
 
       
 
