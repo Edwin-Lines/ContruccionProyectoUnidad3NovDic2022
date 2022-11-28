@@ -1,28 +1,24 @@
 {
-    "employees": [
-        {
-            "employee": {
-                "id": "1",
-                "firstName": "Tom",
-                "lastName": "Cruise",
-                "photo": "https://jsonformatter.org/img/tom-cruise.jpg"
-            }
-        },
-        {
-            "employee": {
-                "id": "2",
-                "firstName": "Maria",
-                "lastName": "Sharapova",
-                "photo": "https://jsonformatter.org/img/Maria-Sharapova.jpg"
-            }
-        },
-        {
-            "employee": {
-                "id": "3",
-                "firstName": "Robert",
-                "lastName": "Downey Jr.",
-                "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg"
-            }
-        }
-    ]
+  "employees" : [ {
+    "employee" : {
+      "firstName" : "Megan",
+      "lastName" : "Trainor",
+      "photo" : "https://imgs.search.brave.com/HDY042vxoTaFNV_fys9zyhdxzxs20sZeiD8c2SNTu64/rs:fit:740:1003:1/g:ce/aHR0cHM6Ly9pbGFy/Z2UubGlzaW1nLmNv/bS9pbWFnZS8xNjMw/NzEyNS83NDBmdWxs/LW1lZ2hhbi10cmFp/bm9yLmpwZw",
+      "id" : "1"
+    }
+  }, {
+    "employee" : {
+      "firstName" : "Angelina",
+      "lastName" : "Jolie",
+      "photo" : "https://imgs.search.brave.com/rUeY3dZ9YQU3cKANaSHD_3PlKruqH61kfO7ylt2-Jzw/rs:fit:1000:1200:1/g:ce/aHR0cDovL2NkbjIu/ZXN0YW1vc3JvZGFu/ZG8uY29tL2Jpb2dy/YWZpYXMvMTIvMTIv/YW5nZWxpbmEtam9s/aWUtMTk5NDE0Lmpw/Zw",
+      "id" : "2"
+    }
+  }, {
+    "employee" : {
+      "firstName" : "Robert",
+      "lastName" : "Downey Jr.",
+      "photo" : "https://jsonformatter.org/img/Robert-Downey-Jr.jpg",
+      "id" : "3"
+    }
+  } ]
 }

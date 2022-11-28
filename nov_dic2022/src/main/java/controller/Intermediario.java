@@ -16,28 +16,41 @@ import unidad_3.backend.Empleado;
 import unidad_3.backend.Exceptions.EstructuraException;
 import unidad_3.backend.Exceptions.LlaveSinValorException;
 import unidad_3.backend.LectorConvertorJSON;
+import unidad_3.backend.ModificadorArchivosJSON;
 
 /**
  *
  * @author betoh
  */
 public class Intermediario {
-      private String nombreArchivo;
-      private String directorio;
+      private static String nombreArchivo;
+      private static String directorio;
       LectorConvertorJSON lector= new LectorConvertorJSON();
       ArrayList<Empleado> empleados= new ArrayList();
+      private static view nView;
 
     
-    public Intermediario(String nombreArchivo, String directorio) {
+      public Intermediario(String nombreArchivo, String directorio) {
          this.nombreArchivo = nombreArchivo;
          this.directorio = directorio;
          envioArrayList();
+      }
+      
+      public Intermediario(ArrayList<Empleado> empleados){
+        String dir=directorio+nombreArchivo;
+        if(ModificadorArchivosJSON.actualizarArchivo(empleados,dir)){
+            envioArrayList();
+            UpdateView();
+        }
+            
       }
 
       public void envioArrayList(){
          try {
                empleados=lector.lecturaArchivo(nombreArchivo, directorio);
-               new view(empleados).setVisible(true);
+               nView= new view(empleados);
+               nView.setVisible(true);
+               
          } catch (EstructuraException ex) {
                Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
          } catch (IOException ex) {
@@ -48,6 +61,13 @@ public class Intermediario {
                Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
          }
       }
+
+      public void UpdateView() {
+            nView.setVisible(false);
+            nView.setVisible(true);
+      }
+      
+      
 
       
 
