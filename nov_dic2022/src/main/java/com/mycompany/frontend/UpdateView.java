@@ -6,6 +6,10 @@ package com.mycompany.frontend;
 
 import controller.Intermediario;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import unidad_3.backend.Empleado;
 
 /**
@@ -15,6 +19,7 @@ import unidad_3.backend.Empleado;
 public class UpdateView extends javax.swing.JFrame {
 
     ArrayList<Empleado> listEmpleado= new ArrayList();
+    private String ID;
     /**
      * Creates new form UpdateView
      * @param listEmpleado
@@ -22,6 +27,10 @@ public class UpdateView extends javax.swing.JFrame {
     public UpdateView(ArrayList<Empleado> listEmpleado) {
         this.listEmpleado=listEmpleado;
         initComponents();
+    }
+    
+    public UpdateView(){
+        
     }
 
     
@@ -57,9 +66,32 @@ public class UpdateView extends javax.swing.JFrame {
 
         jLabel2.setText("ID");
 
+        jTextFieldID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIDActionPerformed(evt);
+            }
+        });
+        jTextFieldID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldIDKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("First Name");
 
+        jTextFieldFirstName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldFirstNameKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Last Name");
+
+        jTextFieldLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldLastNameKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Photo");
 
@@ -73,6 +105,11 @@ public class UpdateView extends javax.swing.JFrame {
 
         jButton2.setText("Cancelar");
         jButton2.setBorderPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -141,15 +178,113 @@ public class UpdateView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String ID=jTextFieldID.getText();
-        String firstName=jTextFieldFirstName.getText();
-        String LastName=jTextFieldLastName.getText();
-        String Photo=jTextFieldPhoto.getText();
         
-        Empleado empleado= new Empleado(ID,firstName,LastName,Photo);
-        listEmpleado.set(Integer.parseInt(ID)-1, empleado);
-        new Intermediario(listEmpleado);
+        if (isAnyEmpty(getjTextFieldID(),getjTextFieldFirstName(),getjTextFieldLastName(),getjTextFieldPhoto())) {
+            JOptionPane.showMessageDialog(this, "Faltan datos.");
+        }else{
+             
+            try {
+                ID=jTextFieldID.getText();  
+                String firstName=jTextFieldFirstName.getText();
+                String LastName=jTextFieldLastName.getText();
+                String Photo=jTextFieldPhoto.getText();
+                
+                Empleado empleado= new Empleado(ID,firstName,LastName,Photo);
+                listEmpleado.set(Integer.parseInt(ID)-1, empleado);
+                new Intermediario(listEmpleado);
+            
+                setVisible(false);
+                dispose();
+            } catch (IndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(this, "No existe ningun dato con ese ID");
+                
+            }
+            
+        }
+        
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextFieldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldIDActionPerformed
+
+    private void jTextFieldIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldIDKeyTyped
+        // TODO add your handling code here:
+         int key = evt.getKeyChar();
+
+        boolean numeros = key >= 48 && key <= 57;
+
+        if (!numeros){
+            evt.consume();
+        }
+    
+    }//GEN-LAST:event_jTextFieldIDKeyTyped
+
+    private void jTextFieldFirstNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFirstNameKeyTyped
+        // TODO add your handling code here:
+         int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+         if (!(minusculas || mayusculas || espacio))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldFirstNameKeyTyped
+
+    private void jTextFieldLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLastNameKeyTyped
+        // TODO add your handling code here:
+         int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+         if (!(minusculas || mayusculas || espacio))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldLastNameKeyTyped
+
+    
+    public boolean isAnyEmpty(JTextField... textFields) {
+        for (JTextField textField : textFields) {
+            if (textField.getText().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
+    public javax.swing.JTextField getjTextFieldFirstName() {
+        return jTextFieldFirstName;
+    }
+
+
+    public javax.swing.JTextField getjTextFieldID() {
+        return jTextFieldID;
+    }
+
+
+    public javax.swing.JTextField getjTextFieldLastName() {
+        return jTextFieldLastName;
+    }
+
+
+    public javax.swing.JTextField getjTextFieldPhoto() {
+        return jTextFieldPhoto;
+    }
+
 
     /**
      * @param args the command line arguments
@@ -181,7 +316,7 @@ public class UpdateView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new UpdateView().setVisible(true);
+                new UpdateView().setVisible(true);
             }
         });
     }
