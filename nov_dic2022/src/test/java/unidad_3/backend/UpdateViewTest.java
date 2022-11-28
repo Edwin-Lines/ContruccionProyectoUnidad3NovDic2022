@@ -19,7 +19,7 @@ public class UpdateViewTest {
             Empleado empleado= new Empleado("0","Rafael","Perea","onlyfans...");
             listEmpleado.add(empleado);
             Empleado empleado2= new Empleado("2","michael","jackson","www.google.com");
-            listEmpleado.set(0, empleado2);
+            listEmpleado.set(5, empleado2);
         });
    }
 }
