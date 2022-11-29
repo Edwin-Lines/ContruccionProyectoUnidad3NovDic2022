@@ -19,7 +19,6 @@ import unidad_3.backend.Empleado;
 public class UpdateView extends javax.swing.JFrame {
 
     ArrayList<Empleado> listEmpleado= new ArrayList();
-    private String ID;
     /**
      * Creates new form UpdateView
      * @param listEmpleado
@@ -182,23 +181,18 @@ public class UpdateView extends javax.swing.JFrame {
         if (isAnyEmpty(getjTextFieldID(),getjTextFieldFirstName(),getjTextFieldLastName(),getjTextFieldPhoto())) {
             JOptionPane.showMessageDialog(this, "Faltan datos.");
         }else{
-             
-            try {
-                ID=jTextFieldID.getText();  
+                String ID=jTextFieldID.getText();  
                 String firstName=jTextFieldFirstName.getText();
                 String LastName=jTextFieldLastName.getText();
                 String Photo=jTextFieldPhoto.getText();
                 
                 Empleado empleado= new Empleado(ID,firstName,LastName,Photo);
-                listEmpleado.set(Integer.parseInt(ID)-1, empleado);
-                new Intermediario(listEmpleado);
+                Intermediario intermediario= new Intermediario();
+                intermediario.updateJSON(empleado);
             
                 setVisible(false);
                 dispose();
-            } catch (IndexOutOfBoundsException e) {
-                JOptionPane.showMessageDialog(this, "No existe ningun dato con ese ID");
-                
-            }
+           
             
         }
         
