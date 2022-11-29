@@ -28,59 +28,54 @@ import unidad_3.backend.ModificadorArchivosJSON;
 public class Intermediario {
       private static String nombreArchivo;
       private static String directorio;
-      LectorConvertorJSON lector= new LectorConvertorJSON();
-      ArrayList<Empleado> empleados= new ArrayList();
+      LectorConvertorJSON lector = new LectorConvertorJSON();
+      ArrayList<Empleado> empleados = new ArrayList<>();
       private static view nView;
 
-    
-      public Intermediario(String nombreArchivo, String directorio) {
-         this.nombreArchivo = nombreArchivo;
-         this.directorio = directorio;
-         envioArrayList();
+      public Intermediario(String nombreArchivoRecibido, String directorioRecibido) {
+            nombreArchivo = nombreArchivoRecibido;
+            directorio = directorioRecibido;
+            envioArrayList();
       }
 
-      public Intermediario(){
+      public Intermediario() {
       }
-      
-      public void updateJSON(Empleado empleados){
-            String dir=directorio+nombreArchivo;
-            ModificadorArchivosJSON modificador= new ModificadorArchivosJSON(dir);
-            if(modificador.modificarRegistro(empleados)){
+
+      public void updateJSON(Empleado empleados) {
+            String dir = directorio + nombreArchivo;
+            ModificadorArchivosJSON modificador = new ModificadorArchivosJSON(dir);
+            if (modificador.modificarRegistro(empleados)) {
                   closeView();
                   envioArrayList();
-            }else{
+            } else {
                   JOptionPane.showMessageDialog(nView, "No es encuentra ningun dato con ese ID");
             }
-            
+
       }
 
-      public void envioArrayList(){
-         try {
-               empleados=lector.lecturaArchivo(nombreArchivo, directorio);
-               nView= new view(empleados);
-               nView.setVisible(true);
-               
-         } catch (EstructuraException ex) {
-               Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (IOException ex) {
-               Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (ParseException ex) {
-               Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (LlaveSinValorException ex) {
-               Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
-         }
+      public void envioArrayList() {
+            try {
+                  empleados = lector.lecturaArchivo(nombreArchivo, directorio);
+                  nView = new view(empleados);
+                  nView.setVisible(true);
+
+            } catch (EstructuraException ex) {
+                  Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                  Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                  Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (LlaveSinValorException ex) {
+                  Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+            }
       }
 
       public void closeView() {
             nView.setVisible(false);
             nView.dispose();
       }
-      
-      
 
-      
-
-   public static void main(String[] args) {
-      new Intermediario("estructuraCorrecta.json", "nov_dic2022/files/");
-   }
+      public static void main(String[] args) {
+            new Intermediario("estructuraCorrecta.json", "nov_dic2022/files/");
+      }
 }
