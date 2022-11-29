@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
 import org.json.simple.parser.ParseException;
 
 import com.mycompany.frontend.view;
@@ -35,13 +38,19 @@ public class Intermediario {
          this.directorio = directorio;
          envioArrayList();
       }
+
+      public Intermediario(){
+      }
       
-      public Intermediario(ArrayList<Empleado> empleados){
-        String dir=directorio+nombreArchivo;
-        if(ModificadorArchivosJSON.actualizarArchivo(empleados,dir)){
-            envioArrayList();
-            UpdateView();
-        }
+      public void updateJSON(Empleado empleados){
+            String dir=directorio+nombreArchivo;
+            ModificadorArchivosJSON modificador= new ModificadorArchivosJSON(dir);
+            if(modificador.modificarRegistro(empleados)){
+                  closeView();
+                  envioArrayList();
+            }else{
+                  JOptionPane.showMessageDialog(nView, "No es encuentra ningun dato con ese ID");
+            }
             
       }
 
@@ -62,9 +71,9 @@ public class Intermediario {
          }
       }
 
-      public void UpdateView() {
+      public void closeView() {
             nView.setVisible(false);
-            nView.setVisible(true);
+            nView.dispose();
       }
       
       
