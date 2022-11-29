@@ -24,6 +24,7 @@ public class UpdateViewTest {
       Empleado empleado= new Empleado("5","Maikol","Jackson","https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/08/11/12/Michael-Jackson-6.jpg?quality=75&width=1200&auto=webp");
       boolean verificador=modificador.modificarRegistro(empleado); 
       Assertions.assertFalse(verificador);
+
    }
 
 }
