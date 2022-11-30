@@ -21,6 +21,7 @@ public class addView extends javax.swing.JFrame {
      * Creates new form addView
      */
     public addView(ArrayList<Empleado> listEmpleado) {
+        this.listEmpleado= listEmpleado;
         initComponents();
     }
 
@@ -58,8 +59,19 @@ public class addView extends javax.swing.JFrame {
                 jTextFieldFirstNameActionPerformed(evt);
             }
         });
+        jTextFieldFirstName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldFirstNameKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Last Name");
+
+        jTextFieldLastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldLastNameKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("Photo");
 
@@ -71,6 +83,11 @@ public class addView extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,7 +166,8 @@ public class addView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Faltan datos.");
         }else{
                 int size=listEmpleado.size();
-                String ID=String.valueOf(size+1);
+                int identificador=Integer.parseInt(listEmpleado.get(size-1).getId())+1;
+                String ID=String.valueOf(identificador);
                 String firstName=jTextFieldFirstName.getText();
                 String LastName=jTextFieldLastName.getText();
                 String Photo=jTextFieldPhoto.getText();
@@ -164,6 +182,40 @@ public class addView extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextFieldFirstNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFirstNameKeyTyped
+        // TODO add your handling code here:
+         int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+         if (!(minusculas || mayusculas || espacio))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldFirstNameKeyTyped
+
+    private void jTextFieldLastNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLastNameKeyTyped
+        // TODO add your handling code here:
+         int key = evt.getKeyChar();
+
+        boolean mayusculas = key >= 65 && key <= 90;
+        boolean minusculas = key >= 97 && key <= 122;
+        boolean espacio = key == 32;
+
+         if (!(minusculas || mayusculas || espacio))
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldLastNameKeyTyped
 
     public boolean isAnyEmpty(JTextField... textFields) {
         for (JTextField textField : textFields) {
@@ -218,7 +270,7 @@ public class addView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new addView().setVisible(true);
+               // new addView().setVisible(true);
             }
         });
     }

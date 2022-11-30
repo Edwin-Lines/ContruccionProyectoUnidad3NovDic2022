@@ -54,6 +54,20 @@ public class Intermediario {
             
       }
 
+      public void addRegistroJSON(Empleado empleados){
+            // String dir=directorio+nombreArchivo;
+            // ModificadorArchivosJSON modificador= new ModificadorArchivosJSON(dir);
+            // if(modificador.modificarRegistro(empleados)){
+            //       closeView();
+            //       envioArrayList();
+            // }else{
+            //       JOptionPane.showMessageDialog(nView, "No es encuentra ningun dato con ese ID");
+            // }
+            System.out.println(empleados.getId());
+            System.out.println(empleados.getFirstName());
+            
+      }
+
       public void envioArrayList(){
          try {
                empleados=lector.lecturaArchivo(nombreArchivo, directorio);
