@@ -33,7 +33,7 @@ public class ModificadorArchivosJSON {
         }
     }
 
-    private int buscarEmpleado(Empleado empleado) {
+    public int buscarEmpleado(Empleado empleado) {
         JSONParser jsonParser = new JSONParser();
         try {
 
@@ -49,7 +49,7 @@ public class ModificadorArchivosJSON {
                 JSONObject employeeObject = (JSONObject) tempEmployeeObject.get("employee");
                 Empleado employee = convertorJSON.crearEmpleado(employeeObject);
 
-                if (employee.equals(empleado)) {
+                if (employee.getId().equals(empleado.getId())) {
                     return i;
                 }
 
