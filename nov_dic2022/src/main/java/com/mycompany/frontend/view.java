@@ -30,7 +30,7 @@ public class view extends javax.swing.JFrame {
         tablaDatos.setModel(tm);
         llenarTabla(tm);
     }
-    public view(ArrayList listEmpleado) {
+    public view(ArrayList<Empleado> listEmpleado) {
         this.listEmpleado=listEmpleado;
         initComponents();
         propiedadesTabla();
@@ -129,6 +129,11 @@ public class view extends javax.swing.JFrame {
         jButton2.setText("Eliminar");
 
         jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,6 +198,11 @@ public class view extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new UpdateView(listEmpleado).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

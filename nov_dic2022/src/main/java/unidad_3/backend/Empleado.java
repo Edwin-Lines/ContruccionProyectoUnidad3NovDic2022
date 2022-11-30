@@ -57,4 +57,23 @@ public class Empleado {
         return this.id + ";" + this.firstName + ";" + this.lastName + ";" + this.photo;
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Empleado)) {
+            return false;
+        }
+
+        Empleado other = (Empleado) o;
+
+        if (other.getId().equals(this.getId()) && other.getFirstName().equals(this.getFirstName())  && other.getLastName().equals(this.getLastName()) && other.getPhoto().equals(this.getPhoto()) ) {
+            return true;
+        }
+        return false;
+    }
+
 }
