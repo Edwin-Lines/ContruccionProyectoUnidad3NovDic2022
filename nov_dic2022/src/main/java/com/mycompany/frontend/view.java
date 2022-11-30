@@ -196,12 +196,12 @@ public class view extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        new addView(listEmpleado).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new UpdateView(listEmpleado).setVisible(true);
+        new UpdateView().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
