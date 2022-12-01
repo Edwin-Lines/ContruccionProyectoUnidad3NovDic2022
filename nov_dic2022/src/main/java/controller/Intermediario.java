@@ -63,22 +63,25 @@ public class Intermediario {
             }
       }
 
-      public void envioArrayList() {
-            try {
-                  empleados = lector.lecturaArchivo(nombreArchivo, directorio);
-                  nView = new view(empleados);
-                  nView.setVisible(true);
+            public void envioArrayList() {
+                  try {
+                        empleados = lector.lecturaArchivo(nombreArchivo, directorio);
+                        nView = new view(empleados);
+                        nView.setVisible(true);
 
-            } catch (EstructuraException ex) {
-                  Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                  Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                  Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (LlaveSinValorException ex) {
-                  Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+                  } catch (EstructuraException ex) {
+                        Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+                  } catch (IOException ex) {
+                        Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+                  } catch (ParseException ex) {
+                        Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+                  } catch (LlaveSinValorException ex) {
+                        Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+                  }
             }
-      }
+
+
+ 
 
       public void closeView() {
             nView.setVisible(false);
