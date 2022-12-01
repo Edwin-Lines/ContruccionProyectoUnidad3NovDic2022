@@ -15,4 +15,11 @@ class ModificadorArchivosTest {
 		Assertions.assertFalse(mod.modificarRegistro(modEmp));
 	}
 
+	@Test
+	@DisplayName("No se realiza una eliminar un registro en el documento JSON en caso de que el empleado no se encuentre en el archivo JSON")
+	public void noSedeberiaEliminar() {
+		Empleado modEmp = new Empleado("1", "No", "existe", "https://jsonformatter.org/img/tom-cruise.jpg");
+		Assertions.assertFalse(mod.borrarRegistro(modEmp));
+	}
+
 }
