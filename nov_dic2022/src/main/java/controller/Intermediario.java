@@ -28,6 +28,7 @@ import unidad_3.backend.ModificadorArchivosJSON;
 public class Intermediario {
       private static String nombreArchivo;
       private static String directorio;
+      String dir = directorio + nombreArchivo;
       LectorConvertorJSON lector = new LectorConvertorJSON();
       ArrayList<Empleado> empleados = new ArrayList<>();
       private static view nView;
@@ -42,7 +43,6 @@ public class Intermediario {
       }
 
       public void updateJSON(Empleado empleados) {
-            String dir = directorio + nombreArchivo;
             ModificadorArchivosJSON modificador = new ModificadorArchivosJSON(dir);
             if (modificador.modificarRegistro(empleados)) {
                   closeView();
@@ -51,6 +51,16 @@ public class Intermediario {
                   JOptionPane.showMessageDialog(nView, "No es encuentra ningun dato con ese ID");
             }
 
+      }
+      
+      public void deleteRegistroJSON(Empleado empleados){
+            ModificadorArchivosJSON modificador = new ModificadorArchivosJSON(dir);
+            if (modificador.borrarRegistro(empleados)) {
+                  closeView();
+                  envioArrayList();
+            } else {
+                  JOptionPane.showMessageDialog(nView, "No es encuentra ningun dato con ese ID");
+            }
       }
 
       public void envioArrayList() {

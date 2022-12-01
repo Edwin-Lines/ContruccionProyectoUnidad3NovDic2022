@@ -8,16 +8,9 @@
     }
   }, {
     "employee" : {
-      "firstName" : "Freddy",
-      "lastName" : "Mercury",
-      "photo" : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/freddie-mercury-queen-chaqueta-amarilla-9-agosto-1986-1502982487.jpg",
-      "id" : "2"
-    }
-  }, {
-    "employee" : {
-      "firstName" : "Bon",
-      "lastName" : "Jovi",
-      "photo" : "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Jonbj2013.jpg/160px-Jonbj2013.jpg",
+      "firstName" : "Tom",
+      "lastName" : "Cruise",
+      "photo" : "https://jsonformatter.org/img/tom-cruise.jpg",
       "id" : "3"
     }
   } ]
