@@ -91,7 +91,32 @@ public class ModificadorArchivosJSON {
 
                 JSONObject finalJSON = new JSONObject();
                 finalJSON.put("employees", employeeData);
-                crearArchivoJSON(finalJSON);
+                this.crearArchivoJSON(finalJSON);
+                return true;
+
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean borrarRegistro(Empleado empleado) {
+        int posEmpleado = this.buscarEmpleado(empleado);
+        if (posEmpleado != -1) {
+
+            JSONParser jsonParser = new JSONParser();
+
+            try {
+                FileReader reader = new FileReader(this.documento);
+                Object obj = jsonParser.parse(reader);
+                JSONObject employeeList = (JSONObject) obj;
+                JSONArray employeeData = (JSONArray) employeeList.get("employees");
+                employeeData.remove(posEmpleado);
+
+                JSONObject finalJSON = new JSONObject();
+                finalJSON.put("employees", employeeData);
+                this.crearArchivoJSON(finalJSON);
                 return true;
 
             } catch (IOException | ParseException e) {

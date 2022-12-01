@@ -17,7 +17,7 @@ import unidad_3.backend.Exceptions.LlaveSinValorException;
 public class UpdateViewTest {
 
    @Test
-   @DisplayName("Se verifica que ocurra un cambio dentro del archivo JSON")
+   @DisplayName("Se verifica que ocurra un cambio en un registro dentro del archivo JSON")
    public void validarModificacion() throws LlaveSinValorException, IOException, ParseException {
       String path = "files/pruebasModificacion.json";
       LectorConvertorJSON lector = new LectorConvertorJSON();
@@ -25,38 +25,51 @@ public class UpdateViewTest {
       ModificadorArchivosJSON modificador = new ModificadorArchivosJSON(path);
       Empleado antes = new Empleado("2", "Tom", "Cruise",
             "https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/08/11/12/Michael-Jackson-6.jpg?quality=75&width=1200&auto=webp");
-            Empleado despues = new Empleado(antes.getId(), antes.getFirstName(), antes.getLastName(), antes.getPhoto());
+      Empleado despues = new Empleado(antes.getId(), antes.getFirstName(), antes.getLastName(), antes.getPhoto());
 
-           
+      despues.setFirstName("Emilio");
+      despues.setLastName("Mex");
+      despues.setPhoto("URL");
 
+      int existe = modificador.buscarEmpleado(antes);
 
-            despues.setFirstName("Emilio");
-            despues.setLastName("Mex");
-            despues.setPhoto("URL");
+      if (existe != -1) {
+         modificador.modificarRegistro(despues);
+      }
 
-            
-            int existe = modificador.buscarEmpleado(antes);
+      JSONParser jsonParser = new JSONParser();
+      FileReader reader = new FileReader(path);
+      Object obj = jsonParser.parse(reader);
+      JSONObject employeeList = (JSONObject) obj;
+      JSONArray employeeData = (JSONArray) employeeList.get("employees");
 
-            if(existe != -1){
-               modificador.modificarRegistro(despues);
-            }
+      JSONObject tempEmployeeObject = (JSONObject) employeeData.get(existe);
 
-            JSONParser jsonParser = new JSONParser();
-            FileReader reader = new FileReader(path);
-            Object obj = jsonParser.parse(reader);
-            JSONObject employeeList = (JSONObject) obj;
-            JSONArray employeeData = (JSONArray) employeeList.get("employees");
+      JSONObject employeeObject = (JSONObject) tempEmployeeObject.get("employee");
 
-            JSONObject tempEmployeeObject = (JSONObject) employeeData.get(existe);
+      Empleado actual = lector.crearEmpleado(employeeObject);
 
-            JSONObject employeeObject = (JSONObject) tempEmployeeObject.get("employee");
-
-            Empleado actual = lector.crearEmpleado(employeeObject);
-
-
-
-      
       Assertions.assertEquals("Emilio", actual.getFirstName());
+
+   }
+
+   @Test
+   @DisplayName("Se verifica que ocurra el borrado de un registro dentro del archivo JSON")
+   public void validarEliminacion() throws LlaveSinValorException, IOException, ParseException {
+      String path = "files/pruebasModificacion.json";
+      LectorConvertorJSON lector = new LectorConvertorJSON();
+
+      ModificadorArchivosJSON modificador = new ModificadorArchivosJSON(path);
+      Empleado aBorrar = new Empleado("2", "Tom", "Cruise",
+            "https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/08/11/12/Michael-Jackson-6.jpg?quality=75&width=1200&auto=webp");
+
+      int existe = modificador.buscarEmpleado(aBorrar);
+
+      if (existe != -1) {
+         modificador.borrarRegistro(aBorrar);
+      }
+
+      Assertions.assertEquals(-1, modificador.buscarEmpleado(aBorrar));
 
    }
 

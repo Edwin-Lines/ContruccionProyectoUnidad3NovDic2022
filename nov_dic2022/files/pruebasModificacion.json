@@ -1,17 +1,19 @@
-{
-  "employees" : [ {
-    "employee" : {
-      "firstName" : "Emilio",
-      "lastName" : "Mex",
-      "photo" : "URL",
-      "id" : "2"
+
+  "employees": [
+    {
+      "employee": {
+        "firstName": "Tom",
+        "lastName": "Cruise",
+        "photo": "https: //static.independent.co.uk/s3fs-public/thumbnails/image/2014/08/11/12/Michael-Jackson-6.jpg?quality=75&width=1200&auto=webp",
+        "id": "2"
+      }
+    },
+    {
+      "employee": {
+        "firstName": "Robert",
+        "lastName": "Downey Jr.",
+        "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg",
+        "id": "3"
+      }
     }
-  }, {
-    "employee" : {
-      "firstName" : "Robert",
-      "lastName" : "Downey Jr.",
-      "photo" : "https://jsonformatter.org/img/Robert-Downey-Jr.jpg",
-      "id" : "3"
-    }
-  } ]
-}
+  ]
