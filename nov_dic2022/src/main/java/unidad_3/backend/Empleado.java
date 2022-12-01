@@ -70,7 +70,7 @@ public class Empleado {
 
         Empleado other = (Empleado) o;
 
-        if (other.getId().equals(this.getId())) {
+        if (other.getId().equals(this.getId()) && other.getFirstName().equals(this.getFirstName())  && other.getLastName().equals(this.getLastName()) && other.getPhoto().equals(this.getPhoto()) ) {
             return true;
         }
         return false;
