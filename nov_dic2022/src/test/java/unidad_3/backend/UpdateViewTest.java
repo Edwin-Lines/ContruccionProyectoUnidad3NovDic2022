@@ -1,9 +1,7 @@
 package unidad_3.backend;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import unidad_3.backend.Exceptions.LlaveSinValorException;
+import unidad_3.backend.Exceptions.RegistroExistente;
 
 public class UpdateViewTest {
 
@@ -57,7 +56,6 @@ public class UpdateViewTest {
    @DisplayName("Se verifica que ocurra el borrado de un registro dentro del archivo JSON")
    public void validarEliminacion() throws LlaveSinValorException, IOException, ParseException {
       String path = "files/pruebasModificacion.json";
-      LectorConvertorJSON lector = new LectorConvertorJSON();
 
       ModificadorArchivosJSON modificador = new ModificadorArchivosJSON(path);
       Empleado aBorrar = new Empleado("2", "Tom", "Cruise",
@@ -70,6 +68,29 @@ public class UpdateViewTest {
       }
 
       Assertions.assertEquals(-1, modificador.buscarEmpleado(aBorrar));
+
+   }
+
+   @Test
+   @DisplayName("Se verifica que ocurra la creacion de un registro dentro del archivo JSON")
+   public void validarCreacion() throws LlaveSinValorException, IOException, ParseException {
+      String path = "files/pruebasModificacion.json";
+
+      ModificadorArchivosJSON modificador = new ModificadorArchivosJSON(path);
+      Empleado nuevoRegistro = new Empleado("4", "Brad", "Pitt",
+            "https://images.mubicdn.net/images/cast_member/2552/cache-207-1524922850/image-w856.jpg?size=800x");
+
+      int existe = modificador.buscarEmpleado(nuevoRegistro);
+
+      if (existe == -1) {
+         try {
+            modificador.agregarRegistro(nuevoRegistro);
+         } catch (RegistroExistente e) {
+            e.printStackTrace();
+         }
+      }
+
+      Assertions.assertTrue(modificador.buscarEmpleado(nuevoRegistro) != -1);
 
    }
 

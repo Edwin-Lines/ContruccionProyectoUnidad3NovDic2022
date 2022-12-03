@@ -15,6 +15,14 @@
         "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg",
         "id": "3"
       }
+    },
+    {
+      "employee": {
+        "firstName": "NombrePrueba",
+        "lastName": "GenericLastName",
+        "photo": "AnURL",
+        "id": "1"
+      }
     }
   ]
 }
