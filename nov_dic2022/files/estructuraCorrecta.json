@@ -1,17 +1,24 @@
 {
   "employees" : [ {
     "employee" : {
-      "firstName" : "Michael",
-      "lastName" : "Jackson",
-      "photo" : "https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/08/11/12/Michael-Jackson-6.jpg?quality=75&width=1200&auto=webp",
-      "id" : "1"
+      "firstName" : "Freddy",
+      "lastName" : "Mercury",
+      "photo" : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/freddie-mercury-queen-chaqueta-amarilla-9-agosto-1986-1502982487.jpg",
+      "id" : "2"
     }
   }, {
     "employee" : {
-      "firstName" : "Tom",
-      "lastName" : "Cruise",
-      "photo" : "https://jsonformatter.org/img/tom-cruise.jpg",
-      "id" : "3"
+      "firstName" : "Michael",
+      "lastName" : "Jackson",
+      "photo" : "https://www.hola.com/imagenes/biografias/michael-jackson/79629-jackson10.jpg",
+      "id" : "4"
+    }
+  }, {
+    "employee" : {
+      "firstName" : "Elvis",
+      "lastName" : "presli",
+      "photo" : "https://www.biografiasyvidas.com/biografia/p/fotos/presley_elvis_1.jpg",
+      "id" : "5"
     }
   } ]
 }
