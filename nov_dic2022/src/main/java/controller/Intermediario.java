@@ -18,6 +18,7 @@ import com.mycompany.frontend.view;
 import unidad_3.backend.Empleado;
 import unidad_3.backend.Exceptions.EstructuraException;
 import unidad_3.backend.Exceptions.LlaveSinValorException;
+import unidad_3.backend.Exceptions.RegistroExistente;
 import unidad_3.backend.LectorConvertorJSON;
 import unidad_3.backend.ModificadorArchivosJSON;
 
@@ -62,6 +63,20 @@ public class Intermediario {
                   JOptionPane.showMessageDialog(nView, "No es encuentra ningun dato con ese ID");
             }
       }
+      
+      public void addRegistroJSON(Empleado empleados){
+            ModificadorArchivosJSON modificador = new ModificadorArchivosJSON(dir);
+          try {
+              if (modificador.agregarRegistro(empleados)) {
+                  closeView();
+                  envioArrayList();
+              } else {
+                  JOptionPane.showMessageDialog(nView, "No fue posible agregar un nuevo registro");
+              }
+          } catch (RegistroExistente ex) {
+              Logger.getLogger(Intermediario.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }
 
             public void envioArrayList() {
                   try {
@@ -89,6 +104,6 @@ public class Intermediario {
       }
 
       public static void main(String[] args) {
-            new Intermediario("estructuraCorrecta.json", "nov_dic2022/files/");
+            new Intermediario("estructuraCorrecta.json", "files/");
       }
 }
