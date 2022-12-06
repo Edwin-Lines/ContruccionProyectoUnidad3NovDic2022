@@ -12,6 +12,7 @@ import org.json.simple.parser.ParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import unidad_3.backend.Exceptions.LlaveSinValorException;
+import unidad_3.backend.Exceptions.RegistroExistente;
 
 public class ModificadorArchivosJSON {
     private String documento;
@@ -124,6 +125,48 @@ public class ModificadorArchivosJSON {
             }
         }
         return false;
+    }
+
+    public boolean agregarRegistro(Empleado empleado) throws RegistroExistente {
+
+        int posEmpleado = this.buscarEmpleado(empleado);
+
+        if (posEmpleado != -1) {
+            throw new RegistroExistente(empleado.getId());
+        }
+
+        JSONParser jsonParser = new JSONParser();
+
+        try {
+            FileReader reader = new FileReader(this.documento);
+            Object obj = jsonParser.parse(reader);
+            JSONObject employeeList = (JSONObject) obj;
+            JSONArray employeeData = (JSONArray) employeeList.get("employees");
+
+            JSONObject nuevoRegistro = new JSONObject();
+
+            nuevoRegistro.put("firstName", empleado.getFirstName());
+            nuevoRegistro.put("lastName", empleado.getLastName());
+            nuevoRegistro.put("photo", empleado.getPhoto());
+            nuevoRegistro.put("id", empleado.getId());
+
+            JSONObject employee = new JSONObject();
+
+            employee.put("employee", nuevoRegistro);
+
+            employeeData.add(employee);
+
+            JSONObject finalJSON = new JSONObject();
+            finalJSON.put("employees", employeeData);
+            this.crearArchivoJSON(finalJSON);
+            return true;
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
     }
 
 }

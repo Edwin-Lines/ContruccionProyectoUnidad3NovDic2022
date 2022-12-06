@@ -199,7 +199,7 @@ public class view extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        
+        new addView(listEmpleado).setVisible(true);
     }    
     
     
