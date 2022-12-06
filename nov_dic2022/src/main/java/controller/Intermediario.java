@@ -104,6 +104,6 @@ public class Intermediario {
       }
 
       public static void main(String[] args) {
-            new Intermediario("estructuraCorrecta.json", "files/");
+            new Intermediario("estructuraCorrecta.json", "nov_dic2022/files/");
       }
 }
